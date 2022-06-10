@@ -1,0 +1,26 @@
+$color-white: #f8f8f8;
+$color-light: #ffffff;
+$color-dark: #072C8C;
+$color-primary: #0256C4;
+$color-secondary: #00a1df;
+$color-info: #0ad1cd;
+$color-accent1: #003995;
+$color-accent2: #0075f0;
+$color-accent3: #a8bed2;
+$color-success: #00b166;
+$color-warning:#e6cf00;
+$color-danger: #f81800;
+
+$theme-colors: (
+    "light": $color-light,
+    "dark": $color-dark,
+    "primary": $color-primary,
+    "secondary": $color-secondary,
+    "info": $color-info,
+    "accent1": $color-accent1,
+    "accent2": $color-accent2,
+    "accent3": $color-accent3,
+    "success": $color-success,
+    "warning": $color-warning,
+    "danger": $color-danger,
+);
