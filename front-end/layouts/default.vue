@@ -2,7 +2,9 @@
   <div class="default-layout">
     <header-app></header-app>
     <div class="my-5 pt-5">
-      <Nuxt />
+      <b-container>
+        <Nuxt />
+      </b-container>
     </div>
   </div>
 </template>

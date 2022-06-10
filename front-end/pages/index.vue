@@ -1,13 +1,17 @@
 <template>
   <div>
-    <form-filter></form-filter>
-    <items :items="items" />
+    <div>
+      <form-filter></form-filter>
+    </div>
+    <div class="mt-3">
+      <items :items="items" />
+    </div>
   </div>
 </template>
 
 <script>
 import FormFilter from "../components/items/FormFilter.vue";
-import Items from '../components/items/Items.vue';
+import Items from "../components/items/Items.vue";
 
 export default {
   name: "index-page",

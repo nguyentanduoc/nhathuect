@@ -1,15 +1,30 @@
-$color-white: #f8f8f8;
-$color-light: #ffffff;
-$color-dark: #072C8C;
-$color-primary: #0256C4;
-$color-secondary: #00a1df;
-$color-info: #0ad1cd;
+// $color-white: #f8f8f8;
+// $color-light: #ffffff;
+// $color-dark: #072C8C;
+// $color-primary: #0256C4;
+// $color-secondary: #00a1df;
+// $color-info: #0ad1cd;
+// $color-accent1: #003995;
+// $color-accent2: #0075f0;
+// $color-accent3: #a8bed2;
+// $color-success: #00b166;
+// $color-warning:#e6cf00;
+// $color-danger: #f81800;
+
+
+$color-white: #f6f7f7;
+$color-light: #ded5e8;
+$color-dark: #15191c;
+$color-primary: #f73764;
+$color-secondary: #4002a8;
+$color-info: #35efd3;
 $color-accent1: #003995;
 $color-accent2: #0075f0;
 $color-accent3: #a8bed2;
 $color-success: #00b166;
 $color-warning:#e6cf00;
 $color-danger: #f81800;
+
 
 $theme-colors: (
     "light": $color-light,

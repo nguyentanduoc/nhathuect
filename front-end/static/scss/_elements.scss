@@ -22,7 +22,6 @@ body::-webkit-scrollbar-thumb {
 }
 .card {
     border: none;
-    // @include shadow
 }
 
 .shadow-custom {
@@ -67,3 +66,9 @@ body::-webkit-scrollbar-thumb {
 //         height: 200px;
 //     }
 // }
+.btn,
+.form-control,
+.card,
+.custom-select {
+    border-radius: 0px;
+}
