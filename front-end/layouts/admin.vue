@@ -27,6 +27,9 @@ import { SidebarMenu } from "vue-sidebar-menu";
 export default {
   name: "admin-layout",
   components: { HeaderAdminVue, SidebarMenu },
+  head: {
+    title: "Admin",
+  },
   data() {
     return {
       collapsed: false,

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="ntduoc" id="1">
+        <createTable tableName="users">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="locked" type="boolean"/>
+        </createTable>
+        <addAutoIncrement
+                catalogName="cat"
+                columnDataType="bigint"
+                columnName="id"
+                incrementBy="1"
+                schemaName="public"
+                startWith="1"
+                tableName="users"/>
+    </changeSet>
+    <changeSet id="2" author="ntduoc">
+        <createTable tableName="user_role">
+            <column name="user_id" type="bigint"/>
+            <column name="role_id" type="int"/>
+        </createTable>
+        <addForeignKeyConstraint
+                baseColumnNames="user_id"
+                baseTableCatalogName="cat"
+                baseTableName="user_role"
+                baseTableSchemaName="public"
+                constraintName="fk_user_role_user"
+                deferrable="true"
+                initiallyDeferred="true"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableCatalogName="cat"
+                referencedTableName="users"
+                referencedTableSchemaName="public"
+                validate="true"/>
+        <addForeignKeyConstraint
+                baseColumnNames="role_id"
+                baseTableCatalogName="cat"
+                baseTableName="user_role"
+                baseTableSchemaName="public"
+                constraintName="fk_user_role_role"
+                deferrable="true"
+                initiallyDeferred="true"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableCatalogName="cat"
+                referencedTableName="role"
+                referencedTableSchemaName="public"
+                validate="true"/>
+    </changeSet>
+    <changeSet id="3" author="ntduoc">
+        <insert tableName="users">
+            <column name="username">admin</column>
+            <column name="password">$2a$10$fR8MigJV2eheLZy/ubiy6.P/nlAzgmDG7FcZjdBpWaS9GdpCCHZj6</column>
+            <column name="locked">false</column>
+        </insert>
+        <insert tableName="user_role">
+            <column name="user_id">1</column>
+            <column name="role_id">1</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
