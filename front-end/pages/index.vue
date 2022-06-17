@@ -16,6 +16,7 @@ import Items from "../components/items/Items.vue";
 export default {
   name: "index-page",
   components: { FormFilter, Items },
+  auth: false,
   data() {
     return {
       items: [

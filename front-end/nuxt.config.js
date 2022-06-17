@@ -37,6 +37,7 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     "bootstrap-vue/nuxt",
     "@nuxtjs/axios",
+    '@nuxtjs/auth-next'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -48,10 +49,33 @@ export default {
   },
   axios: {
     // proxy: true
-    baseUrl: process.env.BASE_API_URL || "http://localhost:8000",
+    baseUrl: process.env.BASE_API_URL || "http://localhost:8080",
   },
   env: {
     baseUrl: process.env.BASE_URL || "http://localhost:3000",
-    baseApiUrl: process.env.BASE_API_URL || "http://localhost:8000",
+    baseApiUrl: process.env.BASE_API_URL || "http://localhost:8080",
   },
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          global: true,
+          required: true,
+          type: 'Bearer'
+        },
+        user: {
+          property: 'user',
+        },
+        endpoints: {
+          login: { url: '/api/auth/login', method: 'post' },
+          // logout: { url: '/api/auth/logout', method: 'post' },
+          // user: { url: '/api/auth/user', method: 'get' }
+        }
+      }
+    }
+  },
+  router: {
+    middleware: ['auth']
+  }
 };

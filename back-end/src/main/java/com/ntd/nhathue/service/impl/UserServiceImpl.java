@@ -35,4 +35,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         }
         return new CustomUserDetails(userOptional.get());
     }
+
+    @Override
+    public Optional<User> findByUsername(String userName) {
+        return userRepository.findByUsername(userName);
+    }
 }
