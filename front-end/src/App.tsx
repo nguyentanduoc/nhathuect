@@ -6,6 +6,7 @@ import RequireAuth from "./helps/RequireAuth";
 const Home = loadable(() => import("./pages/home/Home"));
 const Detail = loadable(() => import("./pages/detail/Detail"));
 const Denied = loadable(() => import("./pages/denied/Denied"));
+const Login = loadable(() => import("./pages/login/Login"));
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
             </RequireAuth>
           }
         />
+        <Route path="/login" element={<Login />} />
         {/* <Route path="teams" element={<Teams />}>
           <Route path=":teamId" element={<Team />} />
           <Route path="new" element={<NewTeamForm />} />
