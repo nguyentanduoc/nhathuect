@@ -63,7 +63,7 @@
     <changeSet id="3" author="ntduoc">
         <insert tableName="users">
             <column name="username">admin</column>
-            <column name="password">$2a$10$fR8MigJV2eheLZy/ubiy6.P/nlAzgmDG7FcZjdBpWaS9GdpCCHZj6</column>
+            <column name="password">$2a$12$5FXh9yXMljLrGa6nLUZuceZPct2h39N09pbwJe/3CwSlTumf/u0zu</column><!-- 123456a-->
             <column name="locked">false</column>
         </insert>
         <insert tableName="user_role">

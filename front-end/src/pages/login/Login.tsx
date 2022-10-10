@@ -1,41 +1,60 @@
-import { Card, Row, Typography, Form, Button, Input } from "antd";
+import { Button, Card, Form, Input, Row, Typography } from "antd";
+import { useEffect } from "react";
+import { useApiPost } from "../../hooks/api/usePostApi";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+
 const { Title } = Typography;
+
 const Login = () => {
-  const onFinish = (data: any) => {
-    console.log(data);
+  const { execute, data, error, loading } = useApiPost("auth/login");
+
+  const onFinish = async (data: any) => {
+    execute(data);
   };
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
+  useEffect(() => {
+    console.log(error);
+  }, [error]);
+
   const onFinishFailed = () => {};
+
   return (
     <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
       <Card>
         <Title style={{ textAlign: "center" }}>Login</Title>
         <Form
           name="basic"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          autoComplete="off"
         >
           <Form.Item
-            label="Username"
             name="username"
             rules={[{ required: true, message: "Please input your username!" }]}
           >
-            <Input />
+            <Input
+              prefix={<UserOutlined className="site-form-item-icon" />}
+              placeholder="Username"
+            />
           </Form.Item>
 
           <Form.Item
-            label="Password"
             name="password"
             rules={[{ required: true, message: "Please input your password!" }]}
           >
-            <Input.Password />
+            <Input
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              type="password"
+              placeholder="Password"
+            />
           </Form.Item>
 
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
+          <Form.Item>
+            <Button loading={loading} type="primary" htmlType="submit" block>
               Submit
             </Button>
           </Form.Item>
