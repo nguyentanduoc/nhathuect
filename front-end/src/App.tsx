@@ -8,6 +8,9 @@ const Home = loadable(() => import("./pages/home/Home"));
 const Detail = loadable(() => import("./pages/detail/Detail"));
 const Denied = loadable(() => import("./pages/denied/Denied"));
 const Login = loadable(() => import("./pages/login/Login"));
+const AdminLayout = loadable(() => import("./pages/admin/AdminLayout"));
+const AdminUser = loadable(() => import("./pages/admin/user/AdminUser"));
+const AdminPost = loadable(() => import("./pages/admin/post/AdminPost"));
 
 const App = () => {
   return (
@@ -25,13 +28,19 @@ const App = () => {
             }
           />
           <Route path="/login" element={<Login />} />
-          {/* <Route path="teams" element={<Teams />}>
-          <Route path=":teamId" element={<Team />} />
-          <Route path="new" element={<NewTeamForm />} />
-          <Route index element={<LeagueStandings />} />
-        </Route> */}
-          {/* <Route path="*" element={<NotFound />} /> */}
           <Route path="/denied" element={<Denied />} />
+          {/* admin management */}
+          <Route
+            path="/admin"
+            element={
+              <RequireAuth>
+                <AdminLayout />
+              </RequireAuth>
+            }
+          >
+            <Route path="user" element={<AdminUser />} />
+            <Route path="post" element={<AdminPost />} />
+          </Route>
         </Routes>
       </AuthProvider>
     </ApiProvider>

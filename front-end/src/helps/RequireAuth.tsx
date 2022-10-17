@@ -1,11 +1,10 @@
-import { useContext } from "react";
 import { Navigate } from "react-router-dom";
-import { AuthContext } from "../contexts/AuthContext";
+import { TOKEN_KEY } from "../constant/LocalStogate";
 interface IRequireAuthProps {
   children: JSX.Element;
 }
 const RequireAuth = ({ children }: IRequireAuthProps) => {
-  const { token } = useContext(AuthContext);
+  const token = localStorage.getItem(TOKEN_KEY);
   if (!token) {
     return <Navigate to="/denied" replace />;
   }

@@ -38,12 +38,12 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
   };
 
   useEffect(() => {
-    async function getUser() {
+    const getUser = async () => {
       if (token) {
         const userResponse = await doGet("/auth/user");
         setUser(userResponse);
       }
-    }
+    };
     getUser();
   }, [token, doGet]);
 
@@ -52,6 +52,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
     if (token) {
       setToken(token);
     } else {
+      console.log("token", token);
       navigate("/login");
     }
   }, [navigate, setToken]);
