@@ -1,4 +1,5 @@
-import axios, { AxiosRequestConfig, Axios } from "axios";
+import { message, Spin } from "antd";
+import axios, { Axios, AxiosRequestConfig } from "axios";
 import {
   createContext,
   ReactElement,
@@ -6,8 +7,8 @@ import {
   useMemo,
   useState,
 } from "react";
-import { Alert, message, Spin } from "antd";
 import styled from "styled-components";
+import { TOKEN_KEY } from "../constant/LocalStogate";
 
 interface IApiContext {
   setToken: (token: string) => void;
@@ -16,8 +17,6 @@ interface IApiContext {
 }
 
 export const ApiContext = createContext<IApiContext>({} as IApiContext);
-
-const TOKEN_KEY = "access_token";
 
 interface IApiProviderProps {
   children: ReactElement;
@@ -28,7 +27,7 @@ const ApiProvider = ({ children }: IApiProviderProps) => {
 
   const axiosClient = useMemo<Axios>(() => {
     const client = axios.create({
-      baseURL: "http://localhost:8080/api/",
+      baseURL: process.env.REACT_APP_MAIN,
     });
     client.interceptors.request.use(
       (config: AxiosRequestConfig) => {

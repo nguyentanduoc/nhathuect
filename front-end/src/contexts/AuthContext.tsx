@@ -1,10 +1,19 @@
-import { createContext, ReactElement, useState } from "react";
+import {
+  createContext,
+  ReactElement,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
-import { fakeAuth } from "../services/auth";
+import { TOKEN_KEY } from "../constant/LocalStogate";
+import { IUser } from "../models/IUser";
+import { ApiContext } from "./ApiContext";
 
 interface IAuthContext {
+  user?: IUser;
   token?: string;
-  onLogin: () => void;
+  onLoginSuccess: (token: string) => void;
   onLogout: () => void;
 }
 
@@ -15,22 +24,43 @@ interface IAuthProviderProps {
 }
 export const AuthProvider = ({ children }: IAuthProviderProps) => {
   const [token, setToken] = useState<string>();
+  const [user, setUser] = useState<IUser>();
+  const { doGet } = useContext(ApiContext);
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
-    const token = await fakeAuth();
-    navigate("/detail");
+  const handleLoginSuccess = async (token: string) => {
     setToken(token);
+    localStorage.setItem(TOKEN_KEY, token);
   };
 
   const handleLogout = () => {
     setToken(undefined);
   };
 
+  useEffect(() => {
+    async function getUser() {
+      if (token) {
+        const userResponse = await doGet("/auth/user");
+        setUser(userResponse);
+      }
+    }
+    getUser();
+  }, [token, doGet]);
+
+  useEffect(() => {
+    const token = localStorage.getItem(TOKEN_KEY);
+    if (token) {
+      setToken(token);
+    } else {
+      navigate("/login");
+    }
+  }, [navigate, setToken]);
+
   const value: IAuthContext = {
     token,
-    onLogin: handleLogin,
+    onLoginSuccess: handleLoginSuccess,
     onLogout: handleLogout,
+    user,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

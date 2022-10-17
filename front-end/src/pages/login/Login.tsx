@@ -3,17 +3,19 @@ import { Alert, Button, Card, Form, Input, Row, Space, Typography } from "antd";
 import { useContext, useState } from "react";
 import styled from "styled-components";
 import { ApiContext } from "../../contexts/ApiContext";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const { Title } = Typography;
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState();
   const { doPost } = useContext(ApiContext);
+  const { onLoginSuccess } = useContext(AuthContext);
 
   const onFinish = async (data: any) => {
     try {
       const dataRes = await doPost("auth/login", data);
-      console.log(dataRes);
+      onLoginSuccess(dataRes.token);
     } catch (e: any) {
       setErrorMessage(e?.message);
     }

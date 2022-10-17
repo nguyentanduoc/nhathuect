@@ -51,7 +51,7 @@ public class AuthController {
         }
     }
 
-    @GetMapping("refreshToken")
+    @GetMapping("refresh-token")
     public ResponseEntity<?> refreshToken(HttpServletRequest request) {
         DefaultClaims claims = (io.jsonwebtoken.impl.DefaultClaims) request.getAttribute("claims");
         Map<String, Object> expectedMap = getMapFromIoJsonWebTokenClaims(claims);
